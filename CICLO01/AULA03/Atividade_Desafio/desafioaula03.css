@@ -1,0 +1,222 @@
+body {		
+	margin: 0;
+	padding: 0;	
+}
+
+main {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#cabecalho, #rodape {
+	width: 100%;
+	background-color: #1C1C1C;
+	position: fixed;
+}
+
+#cabecalho {
+	top: 0;
+	height: 40px;
+	display: flex;
+}
+
+#logo {
+	padding: 0;
+	margin: 0;
+	width: 50vw;
+	height: 40px;
+	display: flex;
+	align-items: center;
+}
+
+#p-logo {
+	color: white;
+	font-size: 17px;
+	font-family: Arial;
+	font-weight: bold;
+	margin-left: 10vw;
+}
+
+#lista {
+	padding: 0;
+	margin: 0;
+	width: 50vw;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+
+}
+
+#links {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	list-style: none;
+	margin-left: auto; 
+	margin-right: 10vw;
+	box-sizing: border-box;
+	align-items: center;
+}
+
+#li-home, #contato, #sobre{
+	width:  auto;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+#contato {	
+	padding-right: 2vw;
+	padding-left: 2vw;
+	height: 40px;
+}
+
+#sobre {
+	padding-right: 0;
+	padding-left: 2vw;
+	height: 40px;
+}
+
+a{
+	color: white;
+	font-size: 17px;
+	font-family: Arial;
+	text-decoration: none;
+}
+
+#div-home{
+	padding-right: 2vw;
+	padding-left: 2vw;
+	height: 30px;
+	width: auto;
+	background-color: #ffa600;
+	border-radius: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+/* AQUI CONCENTRAM-SE OS ELEMENTOS DO CENTRO *********************************************************** */
+
+#div_mae {
+	height: 250px;
+	width: 503px;
+	display:  flex;
+	margin-bottom: 30px;
+	align-items: center;
+}
+
+h1 {
+	padding: 10px;
+	width: 250px;
+	height: 175px;
+	align-items: center;
+	font-family: Verdana;
+	color: black;
+	display: flex;
+	font-size: 15px;
+	text-align: left;
+	background-color: #F5F5F5;
+}
+
+#linha {
+	height: 250px;
+	width: 0px;
+	border-right: 3px dotted #BEBEBE;
+}
+
+#div_email {
+	padding: 10px;
+	height: 250px;
+	width: 250px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/*border: 1px solid;*/
+	align-items: center;
+}
+
+.txt {
+	width: 100%;
+	height: 30px;
+	border:  1px solid #777777;
+	border-radius: 5px;
+}
+
+.display-btn{
+	width: 100%;
+	height:  auto;
+	padding: 4px;
+	display: flex;
+	justify-content: center;
+}
+
+.botao {
+  border-radius: 4px;
+  background-color: #ffa600;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  padding: 0;
+  height: 30px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.botao span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.botao span:after {
+  content: '\00bb'; /* símbolo ">>" na trnsição */
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.botao:hover span {
+  padding-right: 25px;
+}
+
+.botao:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/* AQUI TERMINAM OS ELEMENTOS DO CENTRO *********************************************************** */
+
+
+
+#rodape {
+	border-bottom: 0;
+	height: 70px;
+	bottom: 0;
+	display:  flex;
+	justify-content: center;
+	align-items: center;
+}
+
+h2 {
+	font-family: Arial;
+	color:  white;
+	font-weight: bold;
+	display: flex;
+	font-size: 20px;
+}
+
+

@@ -1,0 +1,35 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+main{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#principal{
+	height: auto;
+	width: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+#span{
+	display: flex;
+	justify-content: center;
+	height: auto;
+	width: auto;
+}
+
+h1, h2{
+	padding: 10px;
+}
+
+#icone{
+	color: red;
+	font-size: 100px;
+}

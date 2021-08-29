@@ -1,0 +1,54 @@
+body{
+	margin: 0;
+	padding: 0;
+
+}
+
+main{
+	width:  500px;
+	height: 300px;
+	background-color: #00CED1;
+	padding:  5px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-155px; /* metade da altura + padding */
+    margin-left:-255px;	/* metade da largura + padding */
+    display:  flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.quadrado{
+	width: 120px;
+	height: 120px;
+	position:  relative;
+	background-color: #A020F0;
+	display: flex;
+	left: 0;
+	top: 0;
+}
+
+.circ{
+	width: 120px;
+	height: 120px;
+	border-radius: 100%;
+	position:  absolute; /* PROFESOR!!!!!!!!!!!!!!! AQUI O POSITION RELATIVE NÃO FUNFIONOU!!!!!!!!!!!!!!!!!!!!!!!!! */
+	background-color: #FFD700;
+	display:  flex;
+  	right: 5px; /* PROFESSOR!!!!!!!!!!!!!!!! OS 5PX SÃO PORQUE O MAIN PADDING:  5PX; NÃO FOI RESPEITADO, POR QUE?*/
+  	bottom: 5px;
+}
+
+.center{
+	justify-content: center;
+	align-items: center;
+}
+
+.fonte{
+	font-family: Verdana;
+}
+
+
+

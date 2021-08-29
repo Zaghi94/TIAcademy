@@ -1,0 +1,152 @@
+*{
+	margin: 0;
+	padding: 0;
+	border-sizing: border-box;
+}
+
+body{
+	background-color: #2196f8;
+}
+
+header{
+	position:  absolute;
+	z-index:  1;
+	width:  100%;
+	height:  200px;
+	background-color: #2196f8;
+	display: flex;
+	flex-direction: column;
+	border-bottom: 4px solid #fff;
+}
+
+header > h1{
+	padding: 5px;
+	color: #fff;
+	text-align:  center;
+	font-family: verdana, arial, cursive;
+	margin-top:  40px;
+}
+
+header > h2 {
+	color:  #fff;
+	width:  100%;
+	height: 40px;
+	font-family: Verdana, arial, cursive;
+	font-size: 14px;
+	text-align:  center;
+}
+
+main{
+	position:  absolute;
+	width:  100%;
+	height:  auto;
+	top: 270px; /*distÂncia da janela fixa do topo da página*/ 
+	background-color: #2196f8;
+}
+
+#conteudo-geral{
+	width:  80%;
+	margin:  0 auto;
+	flex-direction: column;
+}
+
+
+.box-custom{
+	z-index:  0;
+	width:  100%;
+	height:  auto;
+}
+
+
+
+a {
+	text-decoration:  none;
+	color:  #000;
+}
+
+form{
+	width: 400px;
+	height: auto;
+	padding: 10px;
+	display:  flex;
+	justify-content: center;
+	flex-direction: column;
+	box-sizing: border-box;
+}
+
+
+.flex{/* uma classe que torna os elementos flex, melhor que deixar todos flex com o *, pois pode perder o controle dos elementos*/ 
+	display: flex;
+}
+
+.justify-content{/*isso é só o nome da classe*/
+	justify-content: center;
+}
+
+.display-btn{
+	width: 100%;
+	height:  auto;
+	padding: 4px;
+	display: flex;
+	justify-content: center;
+}
+
+#btnBuscaCep{
+	margin-top: 15px;
+	padding: 8px;
+	width: 100%;
+	border: 0px solid green;
+	border-radius: 5px;
+	background: rgb(0,0,0);
+	background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,157,44,1) 50%, rgba(0,0,0,1) 100%);
+	color: #fff;
+	cursor: pointer;
+	
+}
+
+#btnBuscaCep:hover{
+	
+	background: rgb(0,157,44);
+	background: linear-gradient(0deg, rgba(0,157,44,1) 0%, rgba(0,0,0,1) 50%, rgba(0,157,44,1) 100%);
+}
+
+form > label {
+	width:  100%;
+	height:  auto;
+	padding:  4px;
+	display:  flex; /*ajuda na parte de renderização, no controle dos elementos*/
+	flex-direction: column;
+	font-family: verdana, cursive;
+	box-sizing: border-box;
+}
+
+form > label > input[type=text]{ /*Essa linha é pra configurar a caixa de preenchimento que está no input que está no label que está no form*/
+	width: 100%;
+	font-size: 14px;
+	border:  none;
+	border-radius: 5px;
+	box-sizing: border-box;
+	padding:  4px; /*aumentou um pouco a cxa de digitação*/
+}
+
+#logo-principal {
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	background-color: #fff;
+	align-items: center;
+
+}
+
+#logo-principal .logo {
+	font-size:  80px;
+}
+
+#content-base{
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top: 150px;
+	display: flex;
+	justify-content: center;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="site3.css">
+	<script type="text/javascript" src="buscaCep.js"></script>
+</head>
+<body>
+	<header>
+		<h1>ME ACHA!</h1>
+		<H2>ENCONTRE O ENDEREÇO PELO NÚMERO DE CEP</H2>
+		<div id="content-base" class="flex justify-content">
+			<div id="logo-principal" class="flex justify-content">
+				<span class="material-icons logo">
+					travel_explore
+				</span>
+			</div>
+		</div>
+	</header>
+		<main>
+			<div id="conteudo-geral" class="flex justify-content"> <!-- <div style="display: none;" id="conteudo-geral"> ##Esse style permite configurar o estilo aqui mesmo -->
+				<div class="box-custom flex justify-content">
+					<form>
+						<label>CEP
+							<input type="text" class="cxCep" name="" value="" required>
+						</label>
+						<label>RUA
+							<input type="text" id="logradouro" name="rua" readonly>
+						</label>
+						<label>BAIRRO
+							<input type="text" id="bairro" name="bairro" readonly>
+						</label>
+						<label>CIDADE
+							<input type="text" id="localidade" name="cidade" readonly>
+						</label>
+						<label>UF
+							<input type="text" id="uf" name="uf" readonly>
+						</label>
+						<input  class="display-btn flex justify-content" id="btnBuscaCep" type="button" value="BUSCARCEP" name="buscar">
+					</form>
+				</div>
+			</div>
+		</main>
+	<footer></footer>
+</body>
+</html>
