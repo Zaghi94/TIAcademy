@@ -71,18 +71,11 @@ app.post('/servico/:id', async(req,res)=>{ //captura o serviço pelo id, 0, 1, 2
     }).catch(function(erro){
         return res.status(400).json({
             error: true,
-            message: "Código não está cadastrado"
+            message: "Código não está cadastrado!"
         });
     });
 });
-//Exercício 01: Visualize todos os clientes:
-app.get('/listaclientes', async(req, res)=>{
-    await cliente.findAll({
-        order:[['nome']]
-    }).then(function(clientes){
-        res.json({clientes})
-    });
-});
+
 
 
 //Exercício 02: Visualize todos os clientes em ordem de antiguidade:
@@ -127,7 +120,6 @@ app.get('/quantidadepedidos', async(req, res)=>{
         res.json(pedidos);
     });
 });
-
 
 
 let port=process.env.PORT || 3000;
