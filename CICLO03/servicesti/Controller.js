@@ -11,11 +11,11 @@ let cliente=models.Cliente; //cria uma variavel cliente que está associada com 
 let pedido=models.Pedido; //cria a variável pedido  relacionada ao obj pedido
 let servico=models.Servico;
 
-app.post('/', function(req,res){
+app.get('/', function(req,res){
     res.send('Olá mundo!'); // get sempre pega resposta
 });
 
-app.post('/clientes', async(req,res)=>{
+app.get('/clientes', async(req,res)=>{
     let create=await cliente.create(//{
         //nome: "Mateus Antonio Zaghi",
         //endereco: "Rua imaginária, 1000",
@@ -28,14 +28,14 @@ app.post('/clientes', async(req,res)=>{
     res.send('Novo cliente inserido'); // get sempre pega resposta
 });
 
-app.post('/pedidos', async(req,res)=>{
+app.get('/pedidos', async(req,res)=>{
     let create=await pedido.create(
         req.body
     );
     res.send('Pedido Inserido!'); // get sempre pega o que está no código, post, posta no servidor
 });
 
-app.post('/servicos', async(req,res)=>{
+app.get('/servicos', async(req,res)=>{
     let create=await servico.create(
     //let create=await servico.create({
        // nome: "Aula de backend",
@@ -46,7 +46,7 @@ app.post('/servicos', async(req,res)=>{
     res.send("Serviço foi inserido!");
 });
 
-app.post('/listaservicos', async(req, res)=>{
+app.put('/listaservicos', async(req, res)=>{
     await servico.findAll({
         order:[['nome','DESC']]
     }).then(function(servicos){
@@ -54,14 +54,14 @@ app.post('/listaservicos', async(req, res)=>{
     });
 });
 
-app.post('/ofertas', async(req, res)=>{ //conta a quatidade de servicos
+app.get('/ofertas', async(req, res)=>{ //conta a quatidade de servicos
     await servico.count('id')
     .then(function(servicos){
         res.json(servicos);
     });
 });
 
-app.post('/servico/:id', async(req,res)=>{ //captura o serviço pelo id, 0, 1, 2, 3...
+app.get('/servico/:id', async(req,res)=>{ //captura o serviço pelo id, 0, 1, 2, 3...
     servico.findByPk(req.params.id)
     .then(servico =>{
         return res.json({
@@ -76,7 +76,118 @@ app.post('/servico/:id', async(req,res)=>{ //captura o serviço pelo id, 0, 1, 2
     });
 });
 
+//AULA 31/08 INICIA AQUI:
 
+app.get('/atualizaservico', async(req,res)=>{
+    await servico.findByPk(1)
+    .then(servico =>{
+        servico.nome='HTML/CSS/JS';
+        servico.descricao='Páginas estáticas e dinâmicas estilizadas';
+        servico.save();
+        return res.json({servico});
+    });
+});
+
+app.put('/editarservico',(req,res)=>{
+    servico.update(req.body,{
+        where: {id: req.body.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Serviço foi alterado com sucesso!"
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            eror: true,
+            message: "Erro na alteração de serviço!"
+        });
+    });
+});
+
+app.get('/servicospedidos', async(req,res)=>{
+    await servico.findByPk(1,{
+        include:[{all:true}]
+    }).then(servico=>{
+        return res.json({servico});
+    });
+});
+
+app.put('/editarpedido02',(req,res)=>{
+    pedido.update(req.body,{
+        where:{ServicoId:req.body.ServicoId}
+    }).then(function(){
+        return res.json({
+            erro: false,
+            message: "Pedido modificado"
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Não foi possível modificar o pedido!"
+        });
+    });
+});
+
+///ABAIXO ESTÃO OS EXERCÍCIOS DO DIA 31/08
+
+// Exercício 01: Faça uma busca por serviços de clientes passando o id do cliente no corpo da requisição:
+
+app.get('/listapedidos/:id', async (req,res)=>{
+    await pedido.findAll({where: {Clienteid: [req.params.id]}})
+    .then(function(pedidos){
+        res.json(pedidos)
+    });
+    console.log
+});
+
+// Exercício 02: Utilize a rota para consultar clientes e faça a edição de um cliente pelo método put
+
+app.put('/editarcliente', (req,res)=>{
+    cliente.update(req,body,{
+        where: {id: req.body.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Cliente alterado com sucesso!"
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Erro ao alterar serviço!"
+        })
+    })
+})
+
+// Exercício 03: Utilize uma rota para consultar pedidos e faça a edição de um pedido pelo método put
+
+app.put('/editarpedido03', (req, res) =>{
+    pedido.update(req.body, {
+        where: {ServicoId: req.body.ServicoId}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Pedido modificado com sucesso!"
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Erro ao modificar o pedido!"
+        });
+    });
+});
+
+
+
+///ABAIXO ESTÃO OS EXERCÍCIOS DO DIA 30/08
+
+//Exercício 01: Visualize todos os clientes:
+app.get('/listaclientes', async(req, res)=>{
+    await cliente.findAll({
+        order:[['nome']]
+    }).then(function(clientes){
+        res.json({clientes})
+    });
+});
 
 //Exercício 02: Visualize todos os clientes em ordem de antiguidade:
 app.get('/visualizaclientes', async(req, res)=>{
@@ -132,6 +243,33 @@ app.get('/pedido/:id', async(req,res)=>{
     });
 });
 
+//EXCLUSÃO DE OBJETOS:
+
+app.get('/excluircliente', async(req,res)=>{
+    cliente.destroy({
+        where: {id: 11}
+    });
+});
+
+app.delete('/apagarcliente/:id', (req,res)=>{
+    cliente.destroy({
+        where:{id:req.params.id}
+    }).then(function(){
+        return res.json({
+            error:false,
+            message: "Cliente foi excluído com sucesso!"
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Não foi possível excluir o cliente!"
+        });
+    });
+})
+
+
+
+//aqui é definida a porta do servidor
 let port=process.env.PORT || 3000;
 
 app.listen(port,(req,res)=>{
