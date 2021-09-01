@@ -121,6 +121,16 @@ app.get('/quantidadepedidos', async(req, res)=>{
     });
 });
 
+//Desafio aula 30/08. Somar os valores dos pedidos de um cliente
+
+app.get('/pedido/:id', async(req,res)=>{
+    await pedido.sum('valor', {where: {ClienteId: req.params.id}})
+   .then((pedido)=>{
+        return res.json({
+            pedido
+        });
+    });
+});
 
 let port=process.env.PORT || 3000;
 
