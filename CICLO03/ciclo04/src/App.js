@@ -5,10 +5,13 @@ import {VisualizarCliente} from './pages/Cliente/VisualizarCliente'
 import {Cliente} from './pages/Cliente';
 import {Pedido} from './pages/Pedido';
 import {Servico} from './pages/Servico';
+import { Menu } from './components/Menu';
+import { VisualizarServico } from './pages/Servico/VisualizarServico';
 
 function App() {
   return (
-    <div> 
+    <div>
+      <Menu/>
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
@@ -16,6 +19,7 @@ function App() {
           <Route path="/cliente" component={Cliente}/>
           <Route path="/pedido" component={Pedido}/>
           <Route path="/servico" component={Servico}/>
+          <Route path="/visualizarservico" component={VisualizarServico}/>
         </Switch>
       </Router>
     </div>
