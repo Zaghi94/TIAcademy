@@ -4,9 +4,11 @@ import {Home} from './pages/Home/';
 import {VisualizarCliente} from './pages/Cliente/VisualizarCliente'
 import {Cliente} from './pages/Cliente';
 import {Pedido} from './pages/Pedido';
-import {Servico} from './pages/Servico';
 import { Menu } from './components/Menu';
+import { VisualizarPedido } from './pages/Pedido/VisualizarPedido';
 import { VisualizarServico } from './pages/Servico/VisualizarServico';
+import {Servico} from './pages/Servico/Servico'
+
 
 function App() {
   return (
@@ -16,10 +18,11 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/visualizarcliente" component={VisualizarCliente}/>
+          <Route path="/visualizarpedido" component={VisualizarPedido}/>
           <Route path="/cliente" component={Cliente}/>
           <Route path="/pedido" component={Pedido}/>
-          <Route path="/servico" component={Servico}/>
           <Route path="/visualizarservico" component={VisualizarServico}/>
+          <Route path="/servico/:id" component={Servico}/>
         </Switch>
       </Router>
     </div>

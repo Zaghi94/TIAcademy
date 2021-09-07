@@ -46,7 +46,7 @@ app.get('/servicos', async(req,res)=>{
     res.send("Serviço foi inserido!");
 });
 
-app.put('/listaservicos', async(req, res)=>{
+app.get('/listaservicos', async(req, res)=>{
     await servico.findAll({
         order:[['nome','DESC']]
     }).then(function(servicos){
@@ -270,7 +270,7 @@ app.delete('/apagarcliente/:id', (req,res)=>{
 
 
 //aqui é definida a porta do servidor
-let port=process.env.PORT || 3000;
+let port=process.env.PORT || 3001;
 
 app.listen(port,(req,res)=>{
     console.log('Servidor ativo');
