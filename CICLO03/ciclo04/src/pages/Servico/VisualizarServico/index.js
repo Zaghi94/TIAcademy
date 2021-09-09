@@ -36,6 +36,18 @@ export const VisualizarServico = () => {
         <div className="p-2">
             <Container>
                 {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ""}
+                <div className="d-flex">
+                    <div className="mr-auto p-2">
+                        <h1>Informações do Serviço</h1>
+                    </div>
+                    <div className="p-2">
+                        <Link to="/cadastrarservico"
+                            className="btn btn-outline-success 
+                            btn-sm">
+                            Cadastrar
+                        </Link>
+                    </div>
+                </div>
                 <Table striped hover>
                     <thead>
                         <tr>

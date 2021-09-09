@@ -8,6 +8,8 @@ import { Menu } from './components/Menu';
 import { VisualizarPedido } from './pages/Pedido/VisualizarPedido';
 import { VisualizarServico } from './pages/Servico/VisualizarServico';
 import {Servico} from './pages/Servico/Servico'
+import { Cadastrar } from './pages/Servico/Cadastrar';
+
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
           <Route path="/pedido" component={Pedido}/>
           <Route path="/visualizarservico" component={VisualizarServico}/>
           <Route path="/servico/:id" component={Servico}/>
+          <Route path="/cadastrarservico" component={Cadastrar}/>
         </Switch>
       </Router>
     </div>
