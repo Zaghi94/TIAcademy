@@ -117,6 +117,7 @@ app.put('/editarservico', (req, res) => {
     });
 });
 
+
 app.get('/servicospedidos', async (req, res) => {
     await servico.findByPk(1, {
         include: [{ all: true }]
@@ -280,6 +281,21 @@ app.delete('/apagarcliente/:id', (req, res) => {
     });
 })
 
+app.delete('/apagarservico/:id', (req, res) => {
+    servico.destroy({
+        where: { id: req.params.id }
+    }).then(function () {
+        return res.json({
+            error: false,
+            message: "Servico foi excluído com sucesso!"
+        });
+    }).catch(function (erro) {
+        return res.status(400).json({
+            error: true,
+            message: "Não foi possível excluir o servico!"
+        });
+    });
+})
 
 
 //aqui é definida a porta do servidor

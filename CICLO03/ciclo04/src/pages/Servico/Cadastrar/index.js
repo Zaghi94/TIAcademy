@@ -91,6 +91,7 @@ export const Cadastrar = () => {
                     </FormGroup>
 
                     {status.formSave ? <Button type="submit" outline-color="info" disabled>Salvando...<Spinner size="sm" color="info" /></Button>:<Button type="submit" outline-color="info">Cadastrar</Button>}
+                    <Button type="reset" outline color="success" className="m-1">Limpar</Button>
                 </Form>
             </Container>
         </div>

@@ -2,24 +2,34 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Container } from "reactstrap";
+import { Alert, Container } from "reactstrap";
 import { api } from "../../../config";
 
 export const Servico = (props) => {
-    console.log(props.match.params.id);
+    //console.log(props.match.params.id);
 
     const [data, setData] = useState([]);
-    const [id, setID] = useState(props.match.params.id);
+    const [id] = useState(props.match.params.id);
+
+    const [status, setStatus] = useState({
+        type: '',
+        message: ''
+    });
+    
 
     useEffect(() => {
         const getServico = async () => {
             await axios.get(api + "/servico/" + id)
                 .then((response) => {
-                    console.log(response.data.servico);
+                    //console.log(response.data.servico);
                     setData(response.data.servico);
                 })
                 .catch(() => {
-                    console.log("Erro: Não foi possível conectar a API.")
+                    setStatus({
+                        type: 'error',
+                        message: 'Erro: Sem conexão com a API.'
+                    })
+                    //console.log("Erro: Não foi possível conectar a API.")
                 })
         }
         getServico();
@@ -30,16 +40,18 @@ export const Servico = (props) => {
             <Container>
                 <div className="d-flex">
                     <div className="mr-auto p-2">
-                        <h1>Informações do Serviço</h1>
+                        <h1>Informações do serviço</h1>
                     </div>
                     <div className="p-2">
-                        <Link to="/visualizarservico"
-                            className="btn btn-outline-success 
-                            btn-sm">
-                            Serviços
-                        </Link>
+                        <Link to="/visualizarservico" className="btn btn-outline-success 
+                            btn-sm m-1">Listar</Link>
+                        <Link to={"/editarservico/"+data.id} 
+                         className="btn btn-outline-success btn-sm m-1">Editar</Link>
                     </div>
                 </div>
+                <hr className="m-1"/>
+                {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ""}
+
                 <div>
                     <dl className="row">
                         <dt className="col-sm-3">Nome</dt>

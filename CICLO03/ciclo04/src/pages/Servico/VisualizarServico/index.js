@@ -28,6 +28,25 @@ export const VisualizarServico = () => {
             });
     }
 
+    const apagarServico = async(idServico) =>{
+        console.log(idServico);
+        const headers={
+            'Content-Type':'application/json'
+        }
+        await axios.delete(api+"/apagarservico/" + idServico, {headers})
+        .then((response)=>{
+            console.log(response.data.error);
+            getServicos(); //isso recarrega os servicos
+        })
+        .catch(()=>{
+            setStatus({
+                type: 'error',
+                message: 'Erro: Não foi possível acessar a API.'
+            });
+        });
+
+    }
+
     useEffect(() => {
         getServicos();
     }, []);
@@ -64,7 +83,12 @@ export const VisualizarServico = () => {
                                 <td>{item.nome}</td>
                                 <td>{item.descricao}</td>
                                 <td className="text-center">
-                                    <Link to={"/servico/"+item.id} className="btn btn-outline-primary btn-sm">Consultar</Link>
+                                    <Link to={"/servico/"+item.id} 
+                                    className="btn btn-outline-primary btn-sm m-1">Consultar</Link>
+                                   <Link to={"/editarservico/"+item.id} 
+                                    className="btn btn-outline-success btn-sm m-1">Editar</Link>
+                                    <span className="btn btn-outline-danger btn-sm m-1"
+                                    onClick={()=>apagarServico(item.id)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}
