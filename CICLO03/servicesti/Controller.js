@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
     res.send('Olá mundo!'); // get sempre pega resposta
 });
 
-app.get('/clientes', async (req, res) => {
+app.post('/clientes', async (req, res) => {
     let create = await cliente.create(//{
         //nome: "Mateus Antonio Zaghi",
         //endereco: "Rua imaginária, 1000",
@@ -28,15 +28,70 @@ app.get('/clientes', async (req, res) => {
     res.send('Novo cliente inserido'); // get sempre pega resposta
 });
 
-app.get('/pedidos', async (req, res) => {
+app.get('/pedidosaula', async (req, res) => {
     let create = await pedido.create(
         req.body
     );
     res.send('Pedido Inserido!'); // get sempre pega o que está no código, post, posta no servidor
 });
 
+app.post('/clientes02', async (req, res) => {
+    await aguardar(1500);
+    function aguardar(ms){
+        return new Promise((resolve) => {
+            setTimeout(resolve,ms);
+        });
+    };
+
+    await cliente.create(
+        req.body
+    ).then(() => {
+        return res.json({
+            type: 'success',
+            message: 'Cliente inserido com sucesso!'
+        });
+    }).catch(function (erro) {
+        return res.status(400).json({
+            type: 'error',
+            message: "Não foi possível cadastrar o cliente!"
+        });
+    });
+
+});
+
+
+app.post('/cadastrarpedidos', async(req,res)=>{
+
+    await aguardar(1500);
+    function aguardar(ms){
+        return new Promise((resolve)=>{
+            setTimeout(resolve,ms);
+        });
+    };
+
+    await pedido.create(
+        req.body
+    ).then(() => {
+        return res.json({
+            type: 'success',
+            message: 'Pedido inserido com sucesso!'
+        });
+    }).catch(function (erro) {
+        return res.status(400).json({
+            type: 'error',
+            message: "Não foi possível cadastrar o pedido!"
+        });
+    });
+
+   // let create = await pedido.create(
+   //     req.body
+   /// );
+   // res.send('Pedido realizado!');
+});
+
+
 app.post('/servicos', async (req, res) => {
-    await aguardar(2000);
+    await aguardar(1500);
     function aguardar(ms){
         return new Promise((resolve) => {
             setTimeout(resolve,ms);
@@ -89,6 +144,40 @@ app.get('/servico/:id', async (req, res) => { //captura o serviço pelo id, 0, 1
         });
 });
 
+app.get('/pedido/:id', async(req,res)=>{
+    pedido.findByPk(req.params.id,  {
+    })
+    .then(pedido=>{
+        return res.json({
+            error: false,
+            pedido
+        });
+    }).catch(function(erro){
+            return res.status(400).json({
+            error: true,
+            message: "Pedido não existe!"
+        });
+    });
+});
+
+
+
+app.get('/cliente/:id', async (req, res) => { //captura o serviço pelo id, 0, 1, 2, 3...
+    cliente.findByPk(req.params.id)
+        .then(cliente => {
+            return res.json({
+                error: false,
+                cliente
+            });
+        }).catch(function (erro) {
+            return res.status(400).json({
+                error: true,
+                message: "Cliente não está cadastrado!"
+            });
+        });
+});
+
+
 //AULA 31/08 INICIA AQUI:
 
 app.get('/atualizaservico', async (req, res) => {
@@ -125,19 +214,19 @@ app.get('/servicospedidos', async (req, res) => {
         return res.json({ servico });
     });
 });
-
-app.put('/editarpedido02', (req, res) => {
-    pedido.update(req.body, {
-        where: { ServicoId: req.body.ServicoId }
-    }).then(function () {
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+app.put('/editarpedido',(req,res)=>{
+    pedido.update(req.body,{
+        where: {id: req.body.id}
+    }).then(function(){
         return res.json({
-            erro: false,
-            message: "Pedido modificado"
+            error: false,
+            message: "Pedido foi alterado com sucesso."
         });
-    }).catch(function (erro) {
-        return res.status(400).json({
-            error: true,
-            message: "Não foi possível modificar o pedido!"
+        }).catch(function(erro){
+            return res.status(400).json({
+            error: true, 
+            message: "Erro na alteração do pedido."
         });
     });
 });
@@ -156,9 +245,10 @@ app.get('/listapedidos/:id', async (req, res) => {
 
 // Exercício 02: Utilize a rota para consultar clientes e faça a edição de um cliente pelo método put
 
-app.put('/editarcliente', (req, res) => {
-    cliente.update(req, body, {
-        where: { id: req.body.id }
+app.put('/alterarcliente', (req, res) => {
+    
+    cliente.update(req.body, {
+        where: {id: req.body.id }
     }).then(function () {
         return res.json({
             error: false,
@@ -167,10 +257,10 @@ app.put('/editarcliente', (req, res) => {
     }).catch(function (erro) {
         return res.status(400).json({
             error: true,
-            message: "Erro ao alterar serviço!"
-        })
-    })
-})
+            message: "Erro ao alterar cliente!"
+        });
+    });
+});
 
 // Exercício 03: Utilize uma rota para consultar pedidos e faça a edição de um pedido pelo método put
 
@@ -212,7 +302,7 @@ app.get('/visualizaclientes', async (req, res) => {
     });
 });
 
-//Exercício 03: Visualize todos os pedidos:
+//Exercício 03: Visualize todos os pedidos:++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 app.get('/listapedidos', async (req, res) => {
     await pedido.findAll({
         order: [['id', 'DESC']]
@@ -248,7 +338,7 @@ app.get('/quantidadepedidos', async (req, res) => {
 
 //Desafio aula 30/08. Somar os valores dos pedidos de um cliente
 
-app.get('/pedido/:id', async (req, res) => {
+app.get('/somapedido/:id', async (req, res) => {
     await pedido.sum('valor', { where: { ClienteId: req.params.id } })
         .then((pedido) => {
             return res.json({
@@ -277,6 +367,22 @@ app.delete('/apagarcliente/:id', (req, res) => {
         return res.status(400).json({
             error: true,
             message: "Não foi possível excluir o cliente!"
+        });
+    });
+})
+
+app.delete('/apagarpedido/:id', (req, res) => {
+    pedido.destroy({
+        where: { id: req.params.id }
+    }).then(function () {
+        return res.json({
+            error: false,
+            message: "Pedido foi excluído com sucesso!"
+        });
+    }).catch(function (erro) {
+        return res.status(400).json({
+            error: true,
+            message: "Não foi possível excluir o Pedido!"
         });
     });
 })

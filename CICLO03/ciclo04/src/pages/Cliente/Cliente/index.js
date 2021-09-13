@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Alert, Container } from "reactstrap";
 import { api } from "../../../config";
 
-export const Servico = (props) => {
+export const Clientevz = (props) => {
     //console.log(props.match.params.id);
 
     const [data, setData] = useState([]);
@@ -18,11 +18,11 @@ export const Servico = (props) => {
     
 
     useEffect(() => {
-        const getServico = async () => {
-            await axios.get(api + "/servico/" + id)
+        const getCliente = async () => {
+            await axios.get(api + "/cliente/" + id)
                 .then((response) => {
                     //console.log(response.data.servico);
-                    setData(response.data.servico);
+                    setData(response.data.cliente);
                 })
                 .catch(() => {
                     setStatus({
@@ -32,7 +32,7 @@ export const Servico = (props) => {
                     //console.log("Erro: Não foi possível conectar a API.")
                 })
         }
-        getServico();
+        getCliente();
     }, [id]);
 
     return (
@@ -40,12 +40,12 @@ export const Servico = (props) => {
             <Container>
                 <div className="d-flex">
                     <div className="mr-auto p-2">
-                        <h1>Página do Serviço</h1>
+                        <h1>Página do Cliente</h1>
                     </div>
                     <div className="p-2">
-                        <Link to="/visualizarservico" className="btn btn-outline-success 
+                        <Link to="/visualizarcliente" className="btn btn-outline-success 
                             btn-sm m-1">Listar</Link>
-                        <Link to={"/editarservico/"+data.id} 
+                        <Link to={"/alterarcliente/"+data.id} 
                          className="btn btn-outline-success btn-sm m-1">Editar</Link>
                     </div>
                 </div>
@@ -58,8 +58,20 @@ export const Servico = (props) => {
                         <dd className="col-sm-3">{data.nome}</dd>
                     </dl>
                     <dl className="row">
-                        <dt className="col-sm-3">Descrição</dt>
-                        <dd className="col-sm-3">{data.descricao}</dd>
+                        <dt className="col-sm-3">Endereço</dt>
+                        <dd className="col-sm-3">{data.endereco}</dd>
+                    </dl>
+                    <dl className="row">
+                        <dt className="col-sm-3">Cidade</dt>
+                        <dd className="col-sm-3">{data.cidade}</dd>
+                    </dl>
+                    <dl className="row">
+                        <dt className="col-sm-3">UF</dt>
+                        <dd className="col-sm-3">{data.uf}</dd>
+                    </dl>
+                    <dl className="row">
+                        <dt className="col-sm-3">Nascimento</dt>
+                        <dd className="col-sm-3">{data.nascimento}</dd>
                     </dl>
                 </div>
             </Container>

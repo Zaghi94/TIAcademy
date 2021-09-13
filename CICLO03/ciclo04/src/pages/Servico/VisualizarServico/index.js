@@ -57,7 +57,7 @@ export const VisualizarServico = () => {
                 {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ""}
                 <div className="d-flex">
                     <div className="mr-auto p-2">
-                        <h1>Informações do Serviço</h1>
+                        <h1>Página de Serviços</h1>
                     </div>
                     <div className="p-2">
                         <Link to="/cadastrarservico"
